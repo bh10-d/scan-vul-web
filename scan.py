@@ -1,5 +1,6 @@
 import sys
 import sqli_scanner as sqliscanner
+import sql_injection_detector as sqlinjection_detectform
 # def menus():
 #     print('''
 #     [+] 1. 
@@ -48,4 +49,7 @@ getAttackName = sys.argv[sys.argv.index('-a')+1]
 
 match getAttackName:
     case 'sqlinjection':
-        sqliscanner.sqlinjection(getUrl)
+        # sqliscanner.sqlinjection(getUrl)
+        detect_form = sqlinjection_detectform.sqlinjection_detectform(getUrl)
+        if detect_form == 0:
+            sqliscanner.sqlinjection(getUrl)
