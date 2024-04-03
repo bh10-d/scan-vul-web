@@ -50,6 +50,8 @@ getAttackName = sys.argv[sys.argv.index('-a')+1]
 match getAttackName:
     case 'sqlinjection':
         # sqliscanner.sqlinjection(getUrl)
+        # print(sqlinjection_detectform.sqlinjection_detectform(getUrl))
         detect_form = sqlinjection_detectform.sqlinjection_detectform(getUrl)
         if detect_form == 0:
+            print(detect_form)
             sqliscanner.sqlinjection(getUrl)
