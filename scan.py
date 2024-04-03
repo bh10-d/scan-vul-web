@@ -52,6 +52,7 @@ match getAttackName:
         # sqliscanner.sqlinjection(getUrl)
         # print(sqlinjection_detectform.sqlinjection_detectform(getUrl))
         detect_form = sqlinjection_detectform.sqlinjection_detectform(getUrl)
+        # print(detect_form)
         if detect_form == 0:
-            print(detect_form)
             sqliscanner.sqlinjection(getUrl)
+            

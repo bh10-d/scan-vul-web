@@ -34,6 +34,7 @@ s.headers["User-Agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit
 # ''')
 
 def sqlinjection_detectform(url):
+	detect_form = 0
 	try:
 		def slowprint(s):
 			for c in s + '\n' :
@@ -156,12 +157,15 @@ def sqlinjection_detectform(url):
 						pprint(form_details)
 						break 
 
-			return len(forms) 
+			detect_form = len(forms)  
+			# print(detect_form)
+			return detect_form
 
 		# if __name__ == "__main__":
 			# import sys
 			# url = sys.argv[1]
-		scan_sql_injection(url)
+		return scan_sql_injection(url)
 		
 	except KeyboardInterrupt:
 		slowprint("\n\033[91m [-] Exiting...")
+	# return detect_form
