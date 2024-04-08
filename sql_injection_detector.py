@@ -23,16 +23,6 @@ s.headers["User-Agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit
 # login_payload['user_token'] = token
 # s.post(login_url, data=login_payload)
 
-# print('''\033[92m
-#     ______            _     _        _____  _   _  
-#     |  _  \          | |   | |      / __  \| | | | 
-#     | | | |___  _   _| |__ | | ___  `' / /'| |_| | 
-#     | | | / _ \| | | | '_ \| |/ _ \   / /  |  _  | 
-#     | |/ / (_) | |_| | |_) | |  __/ ./ /___| | | | 
-#     |___/ \___/ \__,_|_.__/|_|\___| \_____/\_| |_/
-# 	            		recoded by BUIDUCHIEU
-# ''')
-
 def sqlinjection_detectform(url):
 	detect_form = 0
 	try:
@@ -40,7 +30,7 @@ def sqlinjection_detectform(url):
 			for c in s + '\n' :
 				sys.stdout.write(c)
 				sys.stdout.flush()
-				time.sleep(10. / 100)
+				# time.sleep(10. / 100)
 				
 		def get_all_forms(url):
 			"""Given a `url`, it returns all forms from the HTML content"""

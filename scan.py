@@ -1,16 +1,9 @@
 import sys
 import sqli_scanner as sqliscanner
 import sql_injection_detector as sqlinjection_detectform
-# def menus():
-#     print('''
-#     [+] 1. 
-#     [+] 2. Access Control
-#     [+] 3. SQL Injection
-#     [+] 4. 
-#     [+] 5. URL Brute force detection
-#     ''')
+import access_control as accesscontrol
 
-# menus()
+
 print('''\033[92m
     ______            _     _        _____  _   _  
     |  _  \          | |   | |      / __  \| | | | 
@@ -18,7 +11,7 @@ print('''\033[92m
     | | | / _ \| | | | '_ \| |/ _ \   / /  |  _  | 
     | |/ / (_) | |_| | |_) | |  __/ ./ /___| | | | 
     |___/ \___/ \__,_|_.__/|_|\___| \_____/\_| |_/
-	                    recoded by BUIDUCHIEU
+	        recoded by BUIDUCHIEU + MINH HOA
 ''')
 
 attackNameString = [
@@ -36,9 +29,9 @@ helpCommand = """
 getUrl = sys.argv[sys.argv.index('-u')+1]
 getAttackName = sys.argv[sys.argv.index('-a')+1]
 
-# print(sys.argv)
-# print(getUrl)
-# print(getAttackName)
+# handle url
+if getUrl[-1] != '/':
+    getUrl = getUrl + '/'
 
 
 # for string in sys.argv:
@@ -55,4 +48,9 @@ match getAttackName:
         # print(detect_form)
         if detect_form == 0:
             sqliscanner.sqlinjection(getUrl)
+    case 'accesscontrol':
+        accesscontrol.access_control(getUrl)
+    # case 'xss':
+    # case 'oscommand':
+    # case 'pathtraversal':
             

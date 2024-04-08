@@ -18,7 +18,7 @@ def scan(url):
     #         slowprint(f"\033[94m [-] Vulnerability Not Found {url}")
     #     break
 
-url = "https://0add00050435a9068146c07300d400d5.web-security-academy.net/"
+url = "http://localhost:3000/"
 scan(url)
 
 
