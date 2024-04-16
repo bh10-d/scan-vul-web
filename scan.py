@@ -2,6 +2,7 @@ import sys
 import sqli_scanner as sqliscanner
 import sql_injection_detector as sqlinjection_detectform
 import access_control as accesscontrol
+import bruteforce_oscommand as oscommand
 
 
 print('''\033[92m
@@ -51,6 +52,7 @@ match getAttackName:
     case 'accesscontrol':
         accesscontrol.access_control(getUrl)
     # case 'xss':
-    # case 'oscommand':
+    case 'oscommand':
+        oscommand.check(getUrl)
     # case 'pathtraversal':
             
