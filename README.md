@@ -3,9 +3,9 @@ Using pip and install the packages inside the requirements.txt file<br>
 You can use the following commands: pip install -r requirements.txt<br>
 
 <h1>Option</h1>
-    - Access Control <br>
-    - SQL Injection <br>
-    - OS Commands <br>
+    - accesscontrol <br>
+    - sqlinjection <br>
+    - oscommand <br>
     -
     -
 
