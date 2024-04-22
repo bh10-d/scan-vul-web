@@ -1,4 +1,5 @@
 import sys
+import requests
 import sqli_scanner as sqliscanner
 import sql_injection_detector as sqlinjection_detectform
 import access_control as accesscontrol
@@ -31,8 +32,12 @@ getUrl = sys.argv[sys.argv.index('-u')+1]
 getAttackName = sys.argv[sys.argv.index('-a')+1]
 
 # handle url
-if getUrl[-1] != '/':
-    getUrl = getUrl + '/'
+r = requests.get(getUrl)
+if r.status_code == 200:
+    getUrl
+else:
+    if getUrl[-1] != '/':
+        getUrl = getUrl + '/'
 
 
 # for string in sys.argv:
