@@ -18,7 +18,7 @@ def scan_url(url):
         absolute_url = urljoin(url, href)
         if(href.find('/')==0):
             if len(href) != 1:
-                print(href)
+                # print(href)
                 convert = href[href.find('/')+1:]
                 visited_urls.add(url + convert[:convert.find('=')+1])
                 # print(url + convert[:convert.find('=')+1])
@@ -27,6 +27,6 @@ def scan_url(url):
     
     # print(list(visited_urls))
 
-    # return list(visited_urls)
+    return list(visited_urls)
 
-# scan_url('https://0a71008b03b7760d80d8217a0029000d.web-security-academy.net/')
+# scan_url('https://0a21007d046732de8003dbbd00790004.web-security-academy.net/')
