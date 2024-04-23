@@ -54,5 +54,6 @@ match getAttackName:
     # case 'xss':
     case 'oscommand':
         oscommand.check(getUrl)
+        # print("OS-COMMAND")
     # case 'pathtraversal':
             

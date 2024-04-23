@@ -38,7 +38,6 @@ def get_form_details(form):
     return details
 
 def check(url):
-    # print("asdgjasgd")
     # test on HTML forms
     forms = get_all_forms(url)
     # print(forms)
@@ -70,25 +69,26 @@ def check(url):
                         # print('method: POST')
                         res = s.post(url, data=data)
                         if res.status_code == 200:
-                            # print(res.status_code, url, payload)
-                            count+=1
+                            print(res.status_code, url, payload)
+                            # count+=1
                         else:
                             continue
                     elif form_details["method"] == "get":
                         res = s.get(url, params=data)
                         if res.status_code == 200:
-                            # print(res.status_code, url, payload)
-                            count+=1
+                            print(res.status_code, url, payload)
+                            # count+=1
                         else:
                             continue
 
-    if count == 0:
-        print("Not Found")            
-    else:
-        print("MÀy cút")
-        print(count)
+    # if count == 0:
+    #     print("Not Found")            
+    # else:
+    #     print(count)
+    #     print("Mày cút")
     
     # return False
 
 # check("http://10.10.10.138/OS%20command%20Viblo/")
 # check("https://0ac4001b038a48fe832efb2e00de000d.web-security-academy.net/login")
+# check("http://testphp.vulnweb.com/userinfo.php")
