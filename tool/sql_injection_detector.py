@@ -78,6 +78,8 @@ def sqlinjection_detectform(url):
 
 				#Another
 				"invalid csrf token",
+				"administrator",
+				"admin"
 			}
 			# print(response.content.decode().lower())
 			for error in errors:
@@ -137,6 +139,7 @@ def sqlinjection_detectform(url):
 						# print('method: POST')
 						res = s.post(url, data=data)
 						# print(data)
+						# print(res.text)
 					elif form_details["method"] == "get":
 						res = s.get(url, params=data)
 
