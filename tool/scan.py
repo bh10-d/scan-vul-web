@@ -6,15 +6,15 @@ import access_control as accesscontrol
 import bruteforce_oscommand as oscommand
 
 
-print('''\033[92m
+print("""\033[92m
     ______            _     _        _____  _   _  
     |  _  \          | |   | |      / __  \| | | | 
     | | | |___  _   _| |__ | | ___  `' / /'| |_| | 
     | | | / _ \| | | | '_ \| |/ _ \   / /  |  _  | 
     | |/ / (_) | |_| | |_) | |  __/ ./ /___| | | | 
     |___/ \___/ \__,_|_.__/|_|\___| \_____/\_| |_/
-	        recoded by BUIDUCHIEU + MINH HOA
-''')
+	            coded by BUIDUCHIEU + MINH HOA
+""")
 
 attackNameString = [
     {"-r":""}

