@@ -174,7 +174,7 @@ def sqlinjection_detectform(url):
 												# res = s.post(url, data=data) 
 												res = requests.post(url, data=data)
 												if "logout" in res.content.decode().lower():
-													print(f"\033[92m [+] Logout:  ",data)
+													print(f"\033[92m [+] Payload using:  ",data)
 												# array.add(res)
 												# pprint(form_details)
 												# print(data)
@@ -201,7 +201,7 @@ def sqlinjection_detectform(url):
 										# res = s.post(url, data=data) 
 										res = requests.post(url, data=data)
 										if "logout" in res.content.decode().lower():
-											print(f"\033[92m [+] Logout:  ",data)
+											print(f"\033[92m [+] Payload using:  ",data)
 										# array.add(res)
 										# pprint(form_details)
 										# print(data)
