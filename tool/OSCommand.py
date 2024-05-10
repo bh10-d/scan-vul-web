@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from colorama import Fore, Style, init
 import certifi  # Import certifi to manage SSL certificates
+import result
 
 # Khởi tạo colorama
 init(autoreset=True)
@@ -31,7 +32,7 @@ def interact_with_form(url, verify_ssl=True):
         for payload in payloads:
             payload = payload.strip()
             data_to_post = {}
-            print(f"{Fore.YELLOW}Testing payload: {payload}")
+            # print(f"{Fore.YELLOW}Testing payload: {payload}")
             for element in form_elements:
                 element_name = element.get('name', 'unnamed_element')
                 element_type = element.name
@@ -39,25 +40,30 @@ def interact_with_form(url, verify_ssl=True):
                     # Sử dụng giá trị hiện tại cho input có name="csrf"
                     csrf_value = element.get('value')
                     data_to_post[element_name] = csrf_value
-                    print(f"{Fore.CYAN}{element_type}[name={element_name}]: {csrf_value} (preserved)")
+                    # print(f"{Fore.CYAN}{element_type}[name={element_name}]: {csrf_value} (preserved)")
                 else:
                     # Gán payload vào các input và textarea
                     data_to_post[element_name] = payload
-                    print(f"{Fore.MAGENTA}{element_type}[name={element_name}]: {payload}")
+                    # print(f"{Fore.MAGENTA}{element_type}[name={element_name}]: {payload}")
 
             # Gửi yêu cầu POST với dữ liệu payload hiện tại
             post_response = requests.post(url, data=data_to_post, verify=ssl_cert)
-            print(f"POST response status code: {post_response.status_code}")
+            # print(f"POST response status code: {post_response.status_code}")
 
             # Phân tích phản hồi từ server
             response_text_lower = post_response.text.lower()
             if any(keyword in response_text_lower for keyword in keywords):
-                print(f"{Fore.RED}Possible successful command injection detected based on keyword match!")
-                print("------------------------------------------------------------------------------------")
-            else:
-                print(f"{Fore.GREEN}No matches found with the specified keywords in the response.")
-                print("------------------------------------------------------------------------------------")
-
+                result.result['vul'] = True
+                result.result['link'] = url
+                result.result['payload'] = payload
+                result.listObject(result.result)
+                # result.showResult()
+                # print(f"{Fore.RED}Possible successful command injection detected based on keyword match!")
+                # print("------------------------------------------------------------------------------------")
+            # else:
+            #     print(f"{Fore.GREEN}No matches found with the specified keywords in the response.")
+            #     print("------------------------------------------------------------------------------------")
+        result.showResult()
     except requests.RequestException as e:
         print(f"{Fore.RED}Error interacting with the URL {url}: {e}")
     finally:
