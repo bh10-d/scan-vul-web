@@ -61,6 +61,8 @@ match getAttackName:
         if detect_form == 0:
             sqliscanner.sqlinjection(getUrl)
     case 'accesscontrol':
+        if getUrl[-1] != '/':
+            getUrl = getUrl + '/'
         accesscontrol.access_control(getUrl, getUsername, getPassword)
         # print(getUrl)
         # accesscontrol.access_control(getUrl)

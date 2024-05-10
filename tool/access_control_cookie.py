@@ -64,16 +64,17 @@ def checkCookie(url, username, password):
                 # print(f"{cookie_name}: {cookie_data}")
             # print(data)
 
-                
+            # print(mainurl.replace("/login/","")+"/logout")            
     
             respone = config.s.get(url.replace("/login","")+"/admin")
             # print(url.replace("/login","")+"/admin")
             if respone.status_code == 200:
                 result.result["vul"] = True
                 result.result["link"] = url.replace("/login","")+"/admin"
-                result.result["countPayload"] = 0
+                # result.result["countPayload"] = 0
                 result.result["payload"] = "None"
-                result.showResult(result.result)
+                result.listObject(result.result)
+                result.showResult()
                 #for my labs access control
                 config.r.get(mainurl.replace("/login/","")+"/logout")
                 return True
@@ -83,9 +84,10 @@ def checkCookie(url, username, password):
                 if respone.status_code == 200:
                     result.result["vul"] = True
                     result.result["link"] = url.replace("/login","")+"/administrator"
-                    result.result["countPayload"] = 0
+                    # result.result["countPayload"] = 0
                     result.result["payload"] = "None"
-                    result.showResult(result.result)
+                    result.listObject(result.result)
+                    result.showResult()
                     #for my labs access control
                     config.r.get(mainurl.replace("/login/","")+"/logout")
                     return True

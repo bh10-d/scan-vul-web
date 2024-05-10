@@ -22,9 +22,10 @@ def access_control(url, username="wiener", password="peter"):
                         # result.result["id"] = 1
                         result.result["vul"] = True
                         result.result["link"] = url+dis.replace("/","")
-                        result.result["countPayload"] = 0
+                        # result.result["countPayload"] = 0
                         result.result["payload"] = "None"
-                        result.showResult(result.result)
+                        result.listObject(result.result)
+                        result.showResult()
                         # print(result.result)
                         return True
         return False
@@ -46,9 +47,10 @@ def access_control(url, username="wiener", password="peter"):
                         # print(response.status_code, url+matches[0].replace("/",""))
                         result.result["vul"] = True
                         result.result["link"] = url+matches[0].replace("/","")
-                        result.result["countPayload"] = 0
+                        # result.result["countPayload"] = 0
                         result.result["payload"] = "None"
-                        result.showResult(result.result)
+                        result.listObject(result.result)
+                        result.showResult()
                         # print(result.result)
                         return True
                         return True

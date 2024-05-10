@@ -80,6 +80,8 @@ sqlinjection = [
 ]
 
 anotherSqlinjection = [
+    "'or true #",
+    "'or true --",
     "administrator'--",
     "administrator'or'1'='1",
     "admin'--",
