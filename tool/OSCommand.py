@@ -12,8 +12,8 @@ def load_keywords(file_path):
         return [line.strip().lower() for line in file]
 
 def interact_with_form(url, verify_ssl=True):
-    payloads = open("payload-OSCommand.txt", "r")  # Danh sách các payload để thử
-    keywords = load_keywords("list-OSCommand.txt")  # Đọc từ khoá từ tệp
+    payloads = open("payloads/payload-OSCommand.txt", "r")  # Danh sách các payload để thử
+    keywords = load_keywords("payloads/list-OSCommand.txt")  # Đọc từ khoá từ tệp
     ssl_cert = certifi.where() if verify_ssl else False  # Determine SSL certificate based on verify_ssl flag
 
     try:
