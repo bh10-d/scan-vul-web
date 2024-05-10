@@ -1,0 +1,9 @@
+../../etc/passwd
+../../../../../../etc/passwd
+..\\..\\Windows\\System32\\drivers\\etc\\hosts
+../etc/passwd
+..%2F..%2Fetc%2Fpasswd
+/etc/passwd
+....//....//etc/passwd
+../test.txt
+..%2Ftest.txt

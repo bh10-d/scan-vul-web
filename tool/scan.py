@@ -5,6 +5,7 @@ import access_control as accesscontrol
 # import bruteforce_oscommand as oscommand
 import sql_injection_detector as sqlinjection_detectform
 import OSCommand as oscommand
+import pathTraversal as path_traversal
 
 print("""
     ______            _     _        _____  _   _  
@@ -70,5 +71,7 @@ match getAttackName:
     case 'oscommand':
         oscommand.interact_with_form(getUrl, verify_ssl=False)
         # print("OS-COMMAND")
-    # case 'pathtraversal':
+    case 'path_traversal':
+        path_traversal.run_path_traversal_scan(getUrl)
+        # print("path Traversal")
             

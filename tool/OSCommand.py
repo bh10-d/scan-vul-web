@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from colorama import Fore, Style, init
 import certifi  # Import certifi to manage SSL certificates
 import result
+import warnings
 
 # Khởi tạo colorama
 init(autoreset=True)
@@ -68,6 +69,8 @@ def interact_with_form(url, verify_ssl=True):
         print(f"{Fore.RED}Error interacting with the URL {url}: {e}")
     finally:
         payloads.close()
+
+warnings.filterwarnings("ignore")
 
 # Example usage with SSL verification enabled
 # interact_with_form("https://sinhvien.ufl.udn.vn/DangNhap/Login",  verify_ssl=False)

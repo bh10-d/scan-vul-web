@@ -1,0 +1,2 @@
+abc
+root:x:0:0:root:/root:/usr/bin/zsh
