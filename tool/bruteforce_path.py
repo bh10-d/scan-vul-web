@@ -4,7 +4,7 @@ import time
 
 def scan(url):
     
-    payloads = open("list.txt","r")
+    payloads = open("payloads/list_scan_path.txt","r")
     for payload in payloads:
         # time.sleep(10. / 100)
         response = requests.get(url+payload)

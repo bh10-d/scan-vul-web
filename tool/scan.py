@@ -1,12 +1,12 @@
 import sys
-import requests
+import config
 import sqli_scanner as sqliscanner
-import sql_injection_detector as sqlinjection_detectform
 import access_control as accesscontrol
 import bruteforce_oscommand as oscommand
+import sql_injection_detector as sqlinjection_detectform
 
 
-print("""\033[92m
+print("""
     ______            _     _        _____  _   _  
     |  _  \          | |   | |      / __  \| | | | 
     | | | |___  _   _| |__ | | ___  `' / /'| |_| | 
@@ -26,24 +26,30 @@ helpCommand = """
     -h: --help
     -u: url string
     -a: attack name, example: -a sqlinjection, -a accesscontrol, ... 
+    --username: username, example: --username hieu
+    --password: password, example: --password hieu
 """
+
+for string in sys.argv:
+    if((string == '-h' or string == '--help')):
+        print(helpCommand)
+        exit()
 
 getUrl = sys.argv[sys.argv.index('-u')+1]
 getAttackName = sys.argv[sys.argv.index('-a')+1]
-
+getUsername = ''
+getPassword = ''
+if '--username' in sys.argv and '--password' in sys.argv:
+    getUsername = sys.argv[sys.argv.index('--username')+1]
+    getPassword = sys.argv[sys.argv.index('--password')+1]
 # handle url
-r = requests.get(getUrl)
+r = config.r.get(getUrl)
+
 if r.status_code == 200:
     getUrl
 else:
     if getUrl[-1] != '/':
         getUrl = getUrl + '/'
-
-
-# for string in sys.argv:
-#     if((string == '-h' or string == '--help')and string in helpCommand):
-#         print(helpCommand)
-#         exit()
 
 
 match getAttackName:
@@ -55,7 +61,9 @@ match getAttackName:
         if detect_form == 0:
             sqliscanner.sqlinjection(getUrl)
     case 'accesscontrol':
-        accesscontrol.access_control(getUrl)
+        accesscontrol.access_control(getUrl, getUsername, getPassword)
+        # print(getUrl)
+        # accesscontrol.access_control(getUrl)
     # case 'xss':
     case 'oscommand':
         oscommand.check(getUrl)
