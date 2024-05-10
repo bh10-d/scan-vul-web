@@ -1,0 +1,32 @@
+pc1
+ALLUSERSPROFILE
+64 bytes from
+32 bytes
+COLUMNS
+Volume in drive
+hello
+Windows IP Configuration
+root:x:0:0:root:/root:/usr/bin/zsh
+administrator
+COLORTERM
+Microsoft Windows
+eth0
+eth1
+eth2
+eth3
+eth4
+eth5
+eth6
+eth7
+eth8
+eth9
+eth10
+eth11
+eth12
+eth13
+eth14
+eth15
+APACHE_RUN_DIR
+powershell.reverse.txt
+/var/www/html
+root
