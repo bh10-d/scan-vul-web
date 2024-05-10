@@ -1,10 +1,10 @@
-import sys
-import config
+import sys, config
+# import config
 import sqli_scanner as sqliscanner
 import access_control as accesscontrol
-import bruteforce_oscommand as oscommand
+# import bruteforce_oscommand as oscommand
 import sql_injection_detector as sqlinjection_detectform
-
+import OSCommand as oscommand
 
 print("""
     ______            _     _        _____  _   _  
@@ -66,7 +66,7 @@ match getAttackName:
         # accesscontrol.access_control(getUrl)
     # case 'xss':
     case 'oscommand':
-        oscommand.check(getUrl)
+        oscommand.interact_with_form(getUrl, verify_ssl=False)
         # print("OS-COMMAND")
     # case 'pathtraversal':
             
