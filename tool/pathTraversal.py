@@ -1,5 +1,6 @@
 import requests
 from colorama import Fore, Style, init
+import result
 
 # Khởi tạo colorama
 init(autoreset=True)
@@ -36,15 +37,24 @@ def run_path_traversal_scan(base_url):
                         if response.status_code == 200:
                             sensitive_data = analyze_content(response.text, vulnerability_signatures)
                             if sensitive_data:
-                                print(f"Đang kiểm tra payload: {payload}")
-                                print(f"URL: {attack_url}")
-                                print(f"Mã trạng thái: {response.status_code}")
-                                print("!!! Phát hiện khả năng có lỗ hổng điều hướng đường dẫn !!!")
-                                print(f"{Fore.RED}Dữ liệu nhạy cảm tìm thấy trong phản hồi:", sensitive_data)
-                                print("\n" + "="*50 + "\n")
+                                result.isPathTraversal = True
+                                result.result['vul'] = True
+                                result.result['link'] = attack_url
+                                result.result['payload'] = payload
+                                result.result['param'] = param_name
+                                result.listObject(result.result)
+                                # print(f"Đang kiểm tra payload: {payload}")
+                                # print(f"URL: {attack_url}")
+                                # print(f"Mã trạng thái: {response.status_code}")
+                                # print("!!! Phát hiện khả năng có lỗ hổng điều hướng đường dẫn !!!")
+                                # print(f"{Fore.RED}Dữ liệu nhạy cảm tìm thấy trong phản hồi:", sensitive_data)
+                                # print("\n" + "="*50 + "\n")
                     except requests.RequestException as e:
                         print(f"Không thể kết nối đến {attack_url}. Lỗi: {e}")
-
+        if len(result.array) != 0:
+            result.showResult()
+        else:
+            print("Deso cos casi looix loonf naof car")
 # base_url = "http://192.168.1.104/Path%20Traversal/read_poem_web/index.php"
 # base_url = "http://192.168.1.3/index.php"
 

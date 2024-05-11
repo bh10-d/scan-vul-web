@@ -1,6 +1,6 @@
 import copy
 array = []
-
+isPathTraversal = False
 
 result = {
     "id": 0,
@@ -32,7 +32,17 @@ def showResult():
 
     # Set column names with descriptive headers
     # table.field_names = ["ID", "Vulnerable", "Link", "Payload Count", "Payload"]
-    table.field_names = ["ID", "Vulnerable", "Link", "Payload"]
+    # table.field_names = ["ID", "Vulnerable", "Link", "Payload"]
+    # isPathTraversal = False
+    # for mode in array:
+    #     if mode["mode"] == "pathtraversal":
+    #         isPathTraversal = True
+
+    if isPathTraversal:
+        table.field_names = ["ID", "Vulnerable", "Link", "Payload", "Param"]
+    else:
+        table.field_names = ["ID", "Vulnerable", "Link", "Payload"]
+
 
     # array.append(result)
     # array.append(result1)
