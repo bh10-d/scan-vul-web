@@ -54,7 +54,7 @@ def run_path_traversal_scan(base_url):
         if len(result.array) != 0:
             result.showResult()
         else:
-            print("Deso cos casi looix loonf naof car")
+            print("NOT FOUND VULNERABILITIES")
 # base_url = "http://192.168.1.104/Path%20Traversal/read_poem_web/index.php"
 # base_url = "http://192.168.1.3/index.php"
 
